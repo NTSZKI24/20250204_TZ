@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,34 @@ Route::get("/users", [
     Controller::class,
     "getUsers"
 ]);
+
+Route::post("/users", [
+    Controller::class,
+    "createUser"
+]);
+
+Route::put("/users/{user}", [
+     Controller::class,
+    "updateUser"
+]);
+
+Route::delete("/users/{user}", [
+    Controller::class,
+    "deleteUser"
+]);
+
+Route::group([
+    "prefix" => "/cars", 
+    "controller" => CarController::class
+], function(){
+    Route::get("/", "get");
+
+    Route::post("/", "createCar");
+
+    Route::put("/cars/{car}", "updateCar");
+
+    Route::delete("/cars/{car}", "deleteCar");
+});
+
+
+
